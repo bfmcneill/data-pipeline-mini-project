@@ -1,0 +1,31 @@
+services:
+  mysqldb:
+    image: mysql:latest
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: yes
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - 3306:3306
+    platform: linux/amd64
+
+  pyclient:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/data
+      - ./client:/app
+    environment:
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_HOST: ${DATABASE_HOST}
+    depends_on:
+      - mysqldb
+
+volumes:
+  db-data: {}
