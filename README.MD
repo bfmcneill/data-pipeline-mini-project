@@ -52,7 +52,7 @@ docker compose logs mysqldb --follow
 ![bash-usage-example](img/bash-usage-example.png)
 
 ```bash
-bash scripts/etl.sh
+docker compose exec pyclient bash /scripts/etl.sh
 ```
 
 
