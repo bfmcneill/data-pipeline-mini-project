@@ -19,6 +19,7 @@ services:
     volumes:
       - ./data:/data
       - ./client:/app
+      - ./scripts:/scripts
     environment:
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USER: ${DATABASE_USER}
